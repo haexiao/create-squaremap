@@ -28,7 +28,7 @@ Requires JDK 21+.
 
 ```bash
 ./gradlew build
-# Output: build/libs/create-squaremap-bridge-1.0.0.jar
+# Output: build/libs/create-squaremap-bridge-fabric-mc1.21.11-1.0.0.jar
 ```
 
 ## Installation

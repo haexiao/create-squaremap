@@ -29,12 +29,12 @@ Create 的 Contraption（机械结构）部署/拆解时直接写入区块底层
 
 ```bash
 ./gradlew build
-# 产物：build/libs/create-squaremap-bridge-1.0.0.jar
+# 产物：build/libs/create-squaremap-bridge-fabric-mc1.21.11-1.0.0.jar
 ```
 
 ## 安装
 
-1. 将 `build/libs/create-squaremap-bridge-1.0.0.jar` 放入服务器的 `mods/` 目录
+1. 将 `build/libs/create-squaremap-bridge-fabric-mc1.21.11-1.0.0.jar` 放入服务器的 `mods/` 目录
 2. 重启服务器
 3. 启动日志中无 mixin 报错即加载成功
 
