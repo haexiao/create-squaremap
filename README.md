@@ -44,13 +44,14 @@ Create 的 Contraption（机械结构）部署/拆解时直接写入区块底层
 
 ```
 Create 机械写方块 → mixin 捕获 World/WorldChunk.setBlockState
-→ 方块实际变化？→ 按区块去重入队（每 2 秒合并一批）
+→ 方块实际变化？→ 按区块去重入队（每 tick 检查，2 秒合并一批）
 → 调用 squaremap CHUNK_CHANGED 事件 → 区块重新渲染
 ```
 
 ## 设计细节
 
 - **双 mixin 注入点**：`ServerWorld#setBlockState`（主）+ `WorldChunk#setBlockState`（兜底 Create 底层写入）
+- **零 fabric-api 依赖**：tick 钩子用 `MinecraftServer#tick` mixin 实现（编译期仅因 squaremap 事件签名需要 fabric-api 类型，compileOnly）
 - **稳定性兜底**：全链路 try-catch（异常静默，绝不影响游戏）；`defaultRequire: 0`（未来 MC 版本改方法签名时仅降级不崩服）；按世界分队列（多世界不错乱）；原子 poll 取队（并发不丢数据）
 - **零配置**：无配置文件，装完即用
 

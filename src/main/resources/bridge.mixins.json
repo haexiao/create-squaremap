@@ -4,6 +4,7 @@
   "package": "bridge.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ServerTickMixin",
     "WorldSetBlockStateMixin",
     "ChunkSetBlockStateMixin"
   ],
