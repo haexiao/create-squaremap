@@ -1,5 +1,7 @@
 # create-squaremap-bridge
 
+[**中文文档**](README_CN.md) | [**English**](#)
+
 A lightweight Fabric server-side mod that solves the problem of [Create Fly](https://github.com/ZurrTum/Create-Fly) block changes not being reflected on the [squaremap](https://github.com/jpenilla/squaremap) web map.
 
 ## What it does

@@ -1,5 +1,7 @@
 # create-squaremap-bridge
 
+[**English**](README.md) | [**中文文档**](#)
+
 一个轻量的 Fabric 服务端模组，解决 [Create Fly 机械动力飞越版](https://github.com/ZurrTum/Create-Fly) 改动的方块不更新 [squaremap 网页地图](https://github.com/jpenilla/squaremap) 的问题。
 
 Create 的 Contraption（机械结构）部署/拆解时直接写入区块底层数据，不走标准方块更新事件，导致 squaremap 监听不到、地图不重绘。本模组桥接两者：监听方块写入 → 批量触发 squaremap 的 `CHUNK_CHANGED` 事件。
