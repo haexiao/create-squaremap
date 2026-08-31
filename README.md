@@ -2,7 +2,7 @@
 
 一个轻量的 Fabric 服务端模组，解决 **Create（机械动力）改动的方块不更新 squaremap 网页地图** 的问题。
 
-Create 的 Contraption（机械结构）部署/拆解时直接写入区块底层数据，不走标准方块更新事件，导致 squaremap 监听不到、地图不重绘。本模组桥接两者：监听方块写入 → 批量触发 squaremap 的 `CHUNK_CHANGED` 事件。
+> 这里的 Create 指 **create-fly**（[ZurrTum](https://github.com/ZurrTum/Create-Fly) 的 Create Fabric 移植版，本服使用 `create-fly-1.21.11-6.0.9-5`）。其 Contraption（机械结构）部署/拆解时直接写入区块底层数据，不走标准方块更新事件，导致 squaremap 监听不到、地图不重绘。本模组桥接两者：监听方块写入 → 批量触发 squaremap 的 `CHUNK_CHANGED` 事件。
 
 ## 功能
 
@@ -13,7 +13,7 @@ Create 的 Contraption（机械结构）部署/拆解时直接写入区块底层
 
 ## 兼容性
 
-- 已与服务器上全部 15 个 mod 静态验证无 mixin 冲突（Lithium / Create / fabric-api / journeymap 等）
+- 已与服务器上全部 15 个 mod 静态验证无 mixin 冲突（Lithium / create-fly / fabric-api / journeymap 等）
 - **注意**：依赖 squaremap 内部类 `xyz.jpenilla.squaremap.fabric.event.MapUpdateEvents`（非公开 API）。升级 squaremap **大版本**时可能需要适配；1.3.x 系列内已验证稳定
 
 ## 环境要求
@@ -23,7 +23,7 @@ Create 的 Contraption（机械结构）部署/拆解时直接写入区块底层
 | Minecraft | 1.21.11 |
 | Fabric Loader | 0.18.x |
 | squaremap | 1.3.12+ |
-| create | 6.0.9-5（1.21.11 版） |
+| create-fly | 6.0.9-5（Create 的 Fabric 移植版，1.21.11） |
 
 ## 构建
 
