@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "Create-Squaremap Bridge",
   "description": "桥接 mod：捕获 Create 机械方块写入，触发 squaremap 区块重渲染，让机械改动实时上图。",
-  "authors": ["19089"],
+  "authors": ["haexiao"],
   "license": "MIT",
   "environment": "server",
   "mixins": [

@@ -10,6 +10,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import bridge.BridgeConfig;
 import bridge.BridgeQueue;
 
 /**
@@ -34,8 +35,8 @@ public abstract class WorldSetBlockStateMixin {
             if (old == state) {
                 return;
             }
-            if (!old.getFluidState().isEmpty() && !state.getFluidState().isEmpty()) {
-                return; // 液体流动，跳过
+            if (BridgeConfig.filterLiquids && !old.getFluidState().isEmpty() && !state.getFluidState().isEmpty()) {
+                return; // 液体流动，跳过（可配置 filter-liquids=false 关闭）
             }
             BridgeQueue.mark(world, pos);
         } catch (Throwable ignored) {

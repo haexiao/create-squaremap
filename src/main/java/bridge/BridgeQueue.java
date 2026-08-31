@@ -24,8 +24,8 @@ import xyz.jpenilla.squaremap.fabric.event.MapUpdateEvents;
  * - 触发侧整体 try-catch：任何异常只记一次日志，绝不影响服务器
  */
 public final class BridgeQueue {
-    /** 每多少 tick 向 squaremap 冲刷一次脏区块（40 tick = 2 秒，降低重绘频率/网络传输） */
-    private static final int FLUSH_INTERVAL_TICKS = 40;
+    /** 每多少 tick 向 squaremap 冲刷一次脏区块（可配置，默认 40 tick = 2 秒） */
+    private static final int FLUSH_INTERVAL_TICKS = BridgeConfig.flushIntervalTicks;
 
     private static final Map<ServerWorld, ConcurrentLinkedQueue<ChunkPos>> QUEUES = new ConcurrentHashMap<>();
     private static int tickCounter;
@@ -78,6 +78,9 @@ public final class BridgeQueue {
                 } catch (Throwable t) {
                     // 静默：桥接失败不影响游戏（地图最多不更新，回到现状）
                 }
+            }
+            if (BridgeConfig.debugLog && !unique.isEmpty()) {
+                bridge.BridgeLog.debug("冲刷 {} 个区块 -> squaremap", unique.size());
             }
         }
     }

@@ -11,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.WorldChunk;
 
+import bridge.BridgeConfig;
 import bridge.BridgeQueue;
 
 /**
@@ -36,7 +37,7 @@ public abstract class ChunkSetBlockStateMixin {
             if (old == state) {
                 return;
             }
-            if (!old.getFluidState().isEmpty() && !state.getFluidState().isEmpty()) {
+            if (BridgeConfig.filterLiquids && !old.getFluidState().isEmpty() && !state.getFluidState().isEmpty()) {
                 return;
             }
             BridgeQueue.mark(serverWorld, pos);
