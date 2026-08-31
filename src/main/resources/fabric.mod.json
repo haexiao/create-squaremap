@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "create-squaremap-bridge",
+  "version": "${version}",
+  "name": "Create-Squaremap Bridge",
+  "description": "桥接 mod：捕获 Create 机械方块写入，触发 squaremap 区块重渲染，让机械改动实时上图。",
+  "authors": ["19089"],
+  "license": "MIT",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "bridge.BridgeMod"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "bridge.mixins.json"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.7",
+    "minecraft": "1.21.11",
+    "squaremap": "*"
+  }
+}

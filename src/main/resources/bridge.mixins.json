@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8.4",
+  "package": "bridge.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "WorldSetBlockStateMixin",
+    "ChunkSetBlockStateMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}
