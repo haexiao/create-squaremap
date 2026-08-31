@@ -6,6 +6,7 @@
   "description": "桥接 mod：捕获 Create（create-fly）机械方块写入，触发 squaremap 区块重渲染，让机械改动实时上图。",
   "authors": ["haexiao"],
   "license": "MIT",
+  "icon": "assets/create-squaremap-bridge/icon.png",
   "environment": "server",
   "mixins": [
     {
