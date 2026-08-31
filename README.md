@@ -23,7 +23,7 @@ Create 的 Contraption（机械结构）部署/拆解时直接写入区块底层
 | Minecraft | 1.21.11 |
 | Fabric Loader | 0.18.x |
 | squaremap | 1.3.12+ |
-| create-fly | 6.0.9-5（Create 的 Fabric 移植版，1.21.11） |
+| create-fly | 6.0.9-5 |
 
 ## 构建
 
