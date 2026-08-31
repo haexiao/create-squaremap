@@ -1,74 +1,68 @@
 # create-squaremap-bridge
 
-一个轻量的 Fabric 服务端模组，解决 [Create Fly 机械动力飞越版](https://github.com/ZurrTum/Create-Fly) 改动的方块不更新 [squaremap 网页地图](https://github.com/jpenilla/squaremap) 的问题。
+A lightweight Fabric server-side mod that solves the problem of [Create Fly](https://github.com/ZurrTum/Create-Fly) block changes not being reflected on the [squaremap](https://github.com/jpenilla/squaremap) web map.
 
-Create 的 Contraption（机械结构）部署/拆解时直接写入区块底层数据，不走标准方块更新事件，导致 squaremap 监听不到、地图不重绘。本模组桥接两者：监听方块写入 → 批量触发 squaremap 的 `CHUNK_CHANGED` 事件。
+## What it does
 
-## 功能
+Create's contraptions write blocks directly into chunk storage, bypassing standard block update events — so squaremap never gets notified and the map goes stale. This mod bridges the gap: it captures every `setBlockState` call and forwards it to squaremap's `CHUNK_CHANGED` event.
 
-- Create 机械挖/放/搬运的方块自动更新到 squaremap 地图（默认 15 秒内，与 squaremap 后台渲染周期一致）
-- 覆盖 Contraption 装配/拆解、轨道铺设、运送机搬运等所有 `setBlockState` 路径
-- 液体流动自动过滤（防止海洋/岩浆持续触发重绘）
-- 多世界安全（主世界/下界/末地分队列，互不串扰）
+- Contraption assembly/disassembly, mining heads, track laying and item transport show up on the map automatically
+- Liquid flow is filtered out by default to avoid render spam
+- Per-world queues keep overworld / nether / end updates isolated
+- Safe by design: all exceptions are swallowed, `defaultRequire: 0` means it degrades gracefully instead of crashing on future MC versions
 
-## 兼容性
+## Requirements
 
-- 已与服务器上全部 15 个 mod 静态验证无 mixin 冲突（Lithium / create-fly / fabric-api / journeymap 等）
-- **注意**：依赖 squaremap 内部类 `xyz.jpenilla.squaremap.fabric.event.MapUpdateEvents`（非公开 API）。升级 squaremap **大版本**时可能需要适配；1.3.x 系列内已验证稳定
-
-## 环境要求
-
-| 项目 | 版本 |
+| Component | Version |
 |---|---|
 | Minecraft | 1.21.11 |
 | Fabric Loader | 0.18.x |
 | squaremap | 1.3.12+ |
 | create-fly | 6.0.9-5 |
 
-## 构建
+## Building
 
-需要 JDK 21+。
+Requires JDK 21+.
 
 ```bash
 ./gradlew build
-# 产物：build/libs/create-squaremap-bridge-1.0.0.jar
+# Output: build/libs/create-squaremap-bridge-1.0.0.jar
 ```
 
-## 安装
+## Installation
 
-1. 将 `build/libs/create-squaremap-bridge-1.0.0.jar` 放入服务器的 `mods/` 目录
-2. 重启服务器
-3. 启动日志中无 mixin 报错即加载成功
+1. Copy the jar from `build/libs/` into your server's `mods/` folder
+2. Restart the server
+3. No mixin errors in the startup log means it loaded successfully
 
-## 配置
+## Configuration
 
-配置文件：`config/create-squaremap-bridge.properties`（首次启动自动生成）
+Config file: `config/create-squaremap-bridge.properties` (auto-generated on first start)
 
-| 配置项 | 默认值 | 说明 |
+| Option | Default | Description |
 |---|---|---|
-| `flush-interval-ticks` | `40` | 方块变化合并冲刷间隔（tick，20 tick = 1 秒）。调大 → 重绘更稀疏（省性能/网络），地图更新更慢；调小 → 更频繁 |
-| `filter-liquids` | `true` | 过滤液体间流动（水/岩浆互流不触发重绘，防性能浪费）。`false` = 液体流动也重绘 |
-| `debug-log` | `false` | 调试日志：`true` 时每次冲刷打印触发区块数到服务器日志 |
+| `flush-interval-ticks` | `40` | Batch flush interval in ticks (20 ticks = 1s). Higher = less frequent re-renders (saves CPU/network), slower map updates |
+| `filter-liquids` | `true` | Filter liquid-to-liquid flow (water/lava) from triggering re-renders |
+| `debug-log` | `false` | Print the number of chunks flushed per batch to the server log |
 
-> 修改后**重启服务器**生效。
+> Changes take effect after a server restart.
 >
-> 提示：squaremap 本身的 `background-render.interval-seconds`（默认 15）是最终渲染节奏，`flush-interval-ticks` 再小也不会快过它。
+> Tip: squaremap's own `background-render.interval-seconds` (default 15) is the final render cadence — `flush-interval-ticks` cannot make updates faster than that.
 
-## 工作原理
+## How it works
 
 ```
-Create 机械写方块 → mixin 捕获 World/WorldChunk.setBlockState
-→ 方块实际变化？→ 按区块去重入队（每 tick 检查，2 秒合并一批）
-→ 调用 squaremap CHUNK_CHANGED 事件 → 区块重新渲染
+Create writes a block → mixin catches World/WorldChunk.setBlockState
+→ block actually changed? → dedupe per chunk (flush every 2s)
+→ fire squaremap CHUNK_CHANGED event → chunk re-rendered
 ```
 
-## 设计细节
+## Compatibility
 
-- **双 mixin 注入点**：`ServerWorld#setBlockState`（主）+ `WorldChunk#setBlockState`（兜底 Create 底层写入）
-- **零 fabric-api 依赖**：tick 钩子用 `MinecraftServer#tick` mixin 实现（编译期仅因 squaremap 事件签名需要 fabric-api 类型，compileOnly）
-- **稳定性兜底**：全链路 try-catch（异常静默，绝不影响游戏）；`defaultRequire: 0`（未来 MC 版本改方法签名时仅降级不崩服）；按世界分队列（多世界不错乱）；原子 poll 取队（并发不丢数据）
-- **零配置**：无配置文件，装完即用
+- Statically verified against all 15 mods on the target server (Lithium / create-fly / fabric-api / journeymap, etc.) — no mixin conflicts
+- **Note**: depends on squaremap's internal class `xyz.jpenilla.squaremap.fabric.event.MapUpdateEvents` (not a public API). May require small adaptations on major squaremap upgrades; verified stable within the 1.3.x line
+- No fabric-api runtime dependency (tick hook implemented via mixin)
 
 ## License
 
-MIT
+[MIT](LICENSE)
