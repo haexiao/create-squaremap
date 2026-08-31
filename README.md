@@ -44,6 +44,7 @@ Config file: `config/create-squaremap-bridge.properties` (auto-generated on firs
 | `flush-interval-ticks` | `40` | Batch flush interval in ticks (20 ticks = 1s). Higher = less frequent re-renders (saves CPU/network), slower map updates |
 | `filter-liquids` | `true` | Filter liquid-to-liquid flow (water/lava) from triggering re-renders |
 | `debug-log` | `false` | Print the number of chunks flushed per batch to the server log |
+| `language` | `en` | Console log language: `en` or `zh` |
 
 > Changes take effect after a server restart.
 >

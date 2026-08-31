@@ -15,6 +15,9 @@ import net.minecraft.util.math.ChunkPos;
 
 import xyz.jpenilla.squaremap.fabric.event.MapUpdateEvents;
 
+import bridge.BridgeConfig;
+import bridge.BridgeLog;
+
 /**
  * 方块变化节流队列（多世界安全）。
  *
@@ -80,7 +83,7 @@ public final class BridgeQueue {
                 }
             }
             if (BridgeConfig.debugLog && !unique.isEmpty()) {
-                bridge.BridgeLog.debug("冲刷 {} 个区块 -> squaremap", unique.size());
+                BridgeLog.debug("冲刷 {} 个区块 -> squaremap", "Flushed {} chunks -> squaremap", unique.size());
             }
         }
     }

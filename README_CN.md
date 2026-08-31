@@ -45,6 +45,7 @@ Create 的 Contraption（机械结构）部署/拆解时直接写入区块底层
 | `flush-interval-ticks` | `40` | 方块变化合并冲刷间隔（tick，20 tick = 1 秒）。调大 → 重绘更稀疏（省性能/网络），地图更新更慢；调小 → 更频繁 |
 | `filter-liquids` | `true` | 过滤液体间流动（水/岩浆互流不触发重绘，防性能浪费）。`false` = 液体流动也重绘 |
 | `debug-log` | `false` | 调试日志：`true` 时每次冲刷打印触发区块数到服务器日志 |
+| `language` | `en` | 控制台日志语言：`en` 英文 / `zh` 中文 |
 
 > 修改后**重启服务器**生效。
 >
