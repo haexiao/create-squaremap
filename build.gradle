@@ -2,7 +2,7 @@ plugins {
     id "fabric-loom" version "1.17.20"
 }
 
-version = "1.0.0"
+version = "1.1.0"
 group = "bridge"
 
 // jar 命名规范：<名称>-fabric-mc<MC版本>-<版本>.jar（对齐 squaremap 等生态）

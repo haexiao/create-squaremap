@@ -28,7 +28,7 @@ Requires JDK 21+.
 
 ```bash
 ./gradlew build
-# Output: build/libs/create-squaremap-fabric-mc1.21.11-1.0.0.jar
+# Output: build/libs/create-squaremap-fabric-mc1.21.11-1.1.0.jar
 ```
 
 ## Installation
