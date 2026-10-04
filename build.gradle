@@ -7,7 +7,7 @@ group = "bridge"
 
 // jar 命名规范：<名称>-fabric-mc<MC版本>-<版本>.jar（对齐 squaremap 等生态）
 base {
-    archivesName = "create-squaremap-bridge-fabric-mc1.21.11"
+    archivesName = "create-squaremap-fabric-mc1.21.11"
 }
 
 repositories {

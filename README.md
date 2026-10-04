@@ -1,4 +1,4 @@
-# create-squaremap-bridge
+# create-squaremap
 
 [**中文文档**](README_CN.md) | [**English**](#)
 
@@ -28,7 +28,7 @@ Requires JDK 21+.
 
 ```bash
 ./gradlew build
-# Output: build/libs/create-squaremap-bridge-fabric-mc1.21.11-1.0.0.jar
+# Output: build/libs/create-squaremap-fabric-mc1.21.11-1.0.0.jar
 ```
 
 ## Installation
@@ -39,7 +39,7 @@ Requires JDK 21+.
 
 ## Configuration
 
-Config file: `config/create-squaremap-bridge.properties` (auto-generated on first start)
+Config file: `config/create-squaremap.properties` (auto-generated on first start)
 
 | Option | Default | Description |
 |---|---|---|

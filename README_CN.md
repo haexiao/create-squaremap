@@ -1,4 +1,4 @@
-# create-squaremap-bridge
+# create-squaremap
 
 [**English**](README.md) | [**中文文档**](#)
 
@@ -29,18 +29,18 @@ Create 的 Contraption（机械结构）部署/拆解时直接写入区块底层
 
 ```bash
 ./gradlew build
-# 产物：build/libs/create-squaremap-bridge-fabric-mc1.21.11-1.0.0.jar
+# 产物：build/libs/create-squaremap-fabric-mc1.21.11-1.0.0.jar
 ```
 
 ## 安装
 
-1. 将 `build/libs/create-squaremap-bridge-fabric-mc1.21.11-1.0.0.jar` 放入服务器的 `mods/` 目录
+1. 将 `build/libs/create-squaremap-fabric-mc1.21.11-1.0.0.jar` 放入服务器的 `mods/` 目录
 2. 重启服务器
 3. 启动日志中无 mixin 报错即加载成功
 
 ## 配置
 
-配置文件：`config/create-squaremap-bridge.properties`（首次启动自动生成）
+配置文件：`config/create-squaremap.properties`（首次启动自动生成）
 
 | 配置项 | 默认值 | 说明 |
 |---|---|---|

@@ -13,12 +13,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 配置文件读取：config/create-squaremap-bridge.properties
+ * 配置文件读取：config/create-squaremap.properties
  * 首次启动自动生成默认配置；修改后重启服务器生效。
  */
 public final class BridgeConfig {
-    private static final Logger LOGGER = LoggerFactory.getLogger("create-squaremap-bridge");
-    private static final String FILE_NAME = "create-squaremap-bridge.properties";
+    private static final Logger LOGGER = LoggerFactory.getLogger("create-squaremap");
+    private static final String FILE_NAME = "create-squaremap.properties";
 
     /** 方块变化合并冲刷间隔（tick，20 tick = 1 秒）。默认 40 = 2 秒 */
     public static int flushIntervalTicks = 40;
@@ -61,8 +61,8 @@ public final class BridgeConfig {
             props.setProperty("debug-log", String.valueOf(debugLog));
             props.setProperty("language", language);
             try (OutputStream out = Files.newOutputStream(file)) {
-                props.store(out, tr("create-squaremap-bridge 配置（修改后重启生效）",
-                        "create-squaremap-bridge config (restart to apply)"));
+                props.store(out, tr("create-squaremap 配置（修改后重启生效）",
+                        "create-squaremap config (restart to apply)"));
                 LOGGER.info(tr("已生成默认配置文件: {}", "Generated default config file: {}"), file);
             } catch (IOException e) {
                 LOGGER.warn(tr("写入默认配置失败: {}", "Failed to write default config: {}"), e.toString());

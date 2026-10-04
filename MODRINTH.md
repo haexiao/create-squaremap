@@ -1,10 +1,10 @@
-# Create Squaremap Bridge
+# Create Squaremap
 
 A lightweight Fabric server-side mod that bridges **Create Fly** block changes to **squaremap** re-rendering.
 
 Create's contraptions write blocks directly into chunk storage, bypassing standard block update events — so squaremap never gets notified and the web map goes stale. This mod captures every `setBlockState` call and forwards it to squaremap's `CHUNK_CHANGED` event.
 
-**中文文档**: [README_CN](https://github.com/haexiao/create-squaremap-bridge/blob/master/README_CN.md)
+**中文文档**: [README_CN](https://github.com/haexiao/create-squaremap/blob/master/README_CN.md)
 
 ## Features
 
@@ -12,7 +12,7 @@ Create's contraptions write blocks directly into chunk storage, bypassing standa
 - Liquid flow filtered out by default (no render spam)
 - Per-world queues keep overworld / nether / end updates isolated
 - Safe by design: all exceptions are swallowed, degrades gracefully instead of crashing on future MC versions
-- Configurable via `config/create-squaremap-bridge.properties`
+- Configurable via `config/create-squaremap.properties`
 
 ## Requirements
 
@@ -25,7 +25,7 @@ Create's contraptions write blocks directly into chunk storage, bypassing standa
 
 ## Configuration
 
-Config file: `config/create-squaremap-bridge.properties` (auto-generated on first start)
+Config file: `config/create-squaremap.properties` (auto-generated on first start)
 
 | Option | Default | Description |
 |---|---|---|
@@ -46,4 +46,4 @@ Config file: `config/create-squaremap-bridge.properties` (auto-generated on firs
 
 Depends on squaremap's internal class `MapUpdateEvents` (not a public API) — may require small adaptations on major squaremap upgrades; stable within the 1.3.x line.
 
-Source: [github.com/haexiao/create-squaremap-bridge](https://github.com/haexiao/create-squaremap-bridge)
+Source: [github.com/haexiao/create-squaremap](https://github.com/haexiao/create-squaremap)

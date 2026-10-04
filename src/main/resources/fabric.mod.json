@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "id": "create-squaremap-bridge",
+  "id": "create-squaremap",
   "version": "${version}",
-  "name": "Create-Squaremap Bridge",
+  "name": "Create Squaremap",
   "description": "桥接 mod：捕获 Create（create-fly）机械方块写入，触发 squaremap 区块重渲染，让机械改动实时上图。",
   "authors": ["haexiao"],
   "license": "MIT",
-  "icon": "assets/create-squaremap-bridge/icon.png",
+  "icon": "assets/create-squaremap/icon.png",
   "environment": "server",
   "mixins": [
     {
